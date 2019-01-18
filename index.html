@@ -1,0 +1,105 @@
+<!doctype html>
+<!--
+/**
+* style ruler
+* @description : HTML 에서 영역을 선택하는 툴
+* @제한 : MIT 라이센스 + "공대여자는 예쁘다"를 나태낼 수 있어야만 사용할 수 있습니다.
+* @author : 공대여자
+* @site : www.mins01.com
+* @date :2018-11-12~
+*/
+-->
+<html lang="ko" >
+<head>
+	<title>style ruler</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!-- jquery 관련 -->
+	<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>   -->
+	
+	
+	<!-- 부트스트랩 4 : IE8지원안됨! -->
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">  -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>  -->
+	<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script> -->
+	<!-- vue.js -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+	
+	<!-- meta og -->
+	
+	<meta property="og:title" content="style ruler">
+	<meta property="og:description" content="style ruler">
+	<meta name="og:image" content="http://www.mins01.com/img/logo.gif">
+	<meta property="og:image:width" content="190">
+	<meta property="og:image:height" content="70" />
+	<meta property="og:site_name" content="style ruler" />
+	<meta property="og:type" content="document">
+	<style>
+	.ruler{
+		position: relative;
+		box-sizing: content-box;
+		border-width: 0px !important;
+	}
+	.ruler .ruler-x,.ruler .ruler-y{
+		position: absolute;
+		border:1px solid black;
+	}
+
+	.ruler .ruler-x{
+		background-image: url("x.svg");
+		background-position: left bottom;
+		background-repeat: repeat-x;
+		top:-1em;bottom:100%;left:0;right:0;
+		border-width:0px 1px;
+	}
+	.ruler .ruler-y{
+		background-image: url("y.svg");
+		background-position: top left;
+		background-repeat: repeat-y;
+		left:100%;right:-1em;top:0;bottom:0;
+		border:1px solid black;
+		border-width:1px 0px;
+	}
+	.ruler .ruler-x::after , .ruler .ruler-y::after{
+		line-height: 1em;
+		display: flex ;
+		justify-content: center;  /* 가로 중앙 */
+		align-items: center; /* 세로 중앙 */
+		position: absolute;
+		top:0;bottom:0;left:0;right:0;
+
+		text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 -2px 0 #fff, 0 2px 0 #fff, -2px 0 0 #fff, 2px 0 0 #fff;
+
+	}
+	.ruler .ruler-x::after{
+		content: attr(data-ruler);
+		
+	}
+	.ruler .ruler-y::after{
+		content: attr(data-ruler);
+		transform: rotate(90deg);
+	}
+	</style>
+	<style>
+	.test-box{ background-color: #abc;}
+	</style>
+	
+	
+</head>
+<body>
+	<div class="container">
+		
+		<h1>style ruler <button type="button" onclick="window.location.reload(true)">다시 읽기</button></h1>
+		<div class="test-box ruler" style="width:400px; height:300px; margin:0 auto;" >
+			<div class="ruler-x" data-ruler="400px"></div>
+			<div class="ruler-y" data-ruler="300px"></div>
+		</div>
+	</div>
+</body>
+</html>
