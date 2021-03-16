@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko" >
+<head>
+	<title>ui_ruler</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" href="http://www.mins01.com/favicon.ico">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<script src="/js/ForGoogle.js"></script>
+	<!-- google analytics -->
+	<script>ForGoogle.analytics()</script>
+	
+
+	<!-- jquery 관련 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+	<!-- 부트스트랩 4 : IE8지원안됨! -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous"> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script> 
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<!-- vue.js -->
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	
+	<!-- meta og -->
+	
+	<meta property="og:title" content="ui_ruler">
+	<meta property="og:description" content="ui_ruler">
+	<meta name="og:image" content="http://www.mins01.com/img/logo.gif">
+	<meta property="og:image:width" content="190">
+	<meta property="og:image:height" content="70" />
+	<meta property="og:site_name" content="ui_ruler" />
+	<meta property="og:type" content="website">
+	
+	<!-- //meta og -->
+	
+    <style>
+        .ruler{
+            box-sizing: content-box;
+        }
+        .ruler.ruler-v.ruler-px{
+            background: repeating-linear-gradient(90deg,transparent 0,transparent 9px,#666 9px, #666 10px,transparent 0, transparent 10px  ) 0px 100% / 100% 10px no-repeat
+            , repeating-linear-gradient(90deg,transparent 0, transparent 4px,#ccc 4px, #ccc 5px,transparent 0, transparent 5px ) 0px 100% / 100% 6px no-repeat
+            ;
+        }
+        .ruler.ruler-v.ruler-pt{ 
+            background: 
+            repeating-linear-gradient(90deg,transparent 0, transparent calc(10pt - 1px),#666 calc(10pt - 1px), #666 10pt,transparent 0, transparent 10pt  ) 0px 100% / 100% 10px no-repeat
+            , repeating-linear-gradient(90deg,transparent 0, transparent calc(5pt - 1px),#999 calc(5pt - 1px), #999 5pt,transparent 0, transparent 5pt ) 0px 100% / 100% 6px no-repeat
+            ;
+        }
+        .ruler.ruler-v.ruler-mm{ 
+            background: 
+            repeating-linear-gradient(90deg,transparent 0, transparent calc(10mm - 1px),#666 calc(10mm - 1px), #666 10mm,transparent 0, transparent 10mm  ) 0px 100% / 100% 10px no-repeat
+            , repeating-linear-gradient(90deg,transparent 0, transparent calc(5mm - 1px),#999 calc(5mm - 1px), #999 5mm,transparent 0, transparent 5mm ) 0px 100% / 100% 6px no-repeat
+            , repeating-linear-gradient(90deg,transparent 0, transparent calc(1mm - 1px),#ccc calc(1mm - 1px), #ccc 1mm,transparent 0, transparent 1mm ) 0px 100% / 100% 3px no-repeat
+            ;
+        }
+        .ruler.ruler-v.ruler-pc{ 
+            background: 
+            repeating-linear-gradient(90deg,transparent 0, transparent calc(10pc - 1px),#666 calc(10pc - 1px), #666 10pc,transparent 0, transparent 10pc  ) 0px 100% / 100% 10px no-repeat
+            , repeating-linear-gradient(90deg,transparent 0, transparent calc(5pc - 1px),#999 calc(5pc - 1px), #999 5pc,transparent 0, transparent 5pc ) 0px 100% / 100% 6px no-repeat
+            , repeating-linear-gradient(90deg,transparent 0, transparent calc(1pc - 1px),#ccc calc(1pc - 1px), #ccc 1pc,transparent 0, transparent 1pc ) 0px 100% / 100% 3px no-repeat
+            ;
+        }
+        .ruler.ruler-v.ruler-in{ 
+            background: 
+            repeating-linear-gradient(90deg,transparent 0, transparent calc(10in - 1px),#666 calc(10in - 1px), #666 10in,transparent 0, transparent 10in  ) 0px 100% / 100% 10px no-repeat
+            , repeating-linear-gradient(90deg,transparent 0, transparent calc(5in - 1px),#999 calc(5in - 1px), #999 5in,transparent 0, transparent 5in ) 0px 100% / 100% 6px no-repeat
+            , repeating-linear-gradient(90deg,transparent 0, transparent calc(1in - 1px),#ccc calc(1in - 1px), #ccc 1in,transparent 0, transparent 1in ) 0px 100% / 100% 3px no-repeat
+            ;
+        }
+
+        .ruler-h{
+            
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ui_ruler</h1>
+    </header>
+	<div class="container">
+        ruler-v ruler-px : dot per 5px, dot per 10px
+        <div class="ruler ruler-v ruler-px m-1" style="width:10px; height:20px;border: 1px solid #000;font-size:8px">10px</div>
+        <div class="ruler ruler-v ruler-px m-1" style="width:25px; height:20px;border: 1px solid #000;font-size:8px">25px</div>
+        <div class="ruler ruler-v ruler-px m-1" style="width:100px; height:20px;border: 1px solid #000;font-size:8px">100px</div>
+        <div class="m-1" style=" overflow-x: scroll;border: 1px solid #000;"><div class="ruler ruler-v ruler-px" style="width:2000px; height:20px;font-size:8px">2000px</div></div>
+        <hr>
+        ruler-v ruler-pt : dot per 5pt, dot per 10pt
+        <div class="ruler ruler-v ruler-pt m-1" style="width:10pt; height:20px;border: 1px solid #000;font-size:8px">10pt</div>
+        <div class="ruler ruler-v ruler-pt m-1" style="width:25pt; height:20px;border: 1px solid #000;font-size:8px">25pt</div>
+        <div class="ruler ruler-v ruler-pt m-1" style="width:100pt; height:20px;border: 1px solid #000;font-size:8px">100pt</div>
+        <div class="m-1" style=" overflow-x: scroll;border: 1px solid #000;"><div class="ruler ruler-v ruler-pt" style="width:2000pt; height:20px;font-size:8px">2000pt</div></div>
+        <hr>
+        ruler-v ruler-mm : dot per 1mm,dot per 5mm, dot per 10mm
+        <div class="ruler ruler-v ruler-mm m-1" style="width:10mm; height:20px;border: 1px solid #000;font-size:8px">10mm</div>
+        <div class="ruler ruler-v ruler-mm m-1" style="width:25mm; height:20px;border: 1px solid #000;font-size:8px">25mm</div>
+        <div class="ruler ruler-v ruler-mm m-1" style="width:100mm; height:20px;border: 1px solid #000;font-size:8px">100mm</div>
+        <div class="m-1" style=" overflow-x: scroll;border: 1px solid #000;"><div class="ruler ruler-v ruler-mm" style="width:2000mm; height:20px;font-size:8px">2000mm</div></div>
+        <hr>
+        ruler-v ruler-pc : dot per 1pc,dot per 5pc, dot per 10pc
+        <div class="ruler ruler-v ruler-pc m-1" style="width:1pc; height:20px;border: 1px solid #000;font-size:8px">1pc</div>
+        <div class="ruler ruler-v ruler-pc m-1" style="width:10pc; height:20px;border: 1px solid #000;font-size:8px">10pc</div>
+        <div class="ruler ruler-v ruler-pc m-1" style="width:13pc; height:20px;border: 1px solid #000;font-size:8px">13pc</div>
+        <div class="m-1" style=" overflow-x: scroll;border: 1px solid #000;"><div class="ruler ruler-v ruler-pc" style="width:2000pc; height:20px;font-size:8px">2000pc</div></div>
+        <hr>
+        ruler-v ruler-in : dot per 1inch,dot per 5inch, dot per 10inch
+        <div class="ruler ruler-v ruler-in m-1" style="width:2in; height:20px;border: 1px solid #000;font-size:8px">1in</div>
+        <div class="ruler ruler-v ruler-in m-1" style="width:10in; height:20px;border: 1px solid #000;font-size:8px">10in</div>
+        <div class="ruler ruler-v ruler-in m-1" style="width:13in; height:20px;border: 1px solid #000;font-size:8px">13in</div>
+        <div class="m-1" style=" overflow-x: scroll;border: 1px solid #000;"><div class="ruler ruler-v ruler-in" style="width:2000in; height:20px;font-size:8px">2000in</div></div>
+	</div>
+</body>
+</html>
